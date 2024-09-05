@@ -24,12 +24,22 @@ namespace ConsoleUI
             };
 
             carManager.Add(newCar);
-            Console.WriteLine("\nAdded a new car:");
 
-            foreach (var car in carManager.GetAll())
+            var result = carManager.GetAll();
+
+            if (result.Success)
             {
-                Console.WriteLine("{0} {1}", car.Description, car.ModelYear);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("{0} {1}", car.Description, car.ModelYear);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
         }
     }
 }
