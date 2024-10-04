@@ -13,7 +13,7 @@ namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarDbContext))]
     [Migration("20240906103102_add-table-relations")]
-    partial class addtablerelations
+    partial class AddTableRelations : Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

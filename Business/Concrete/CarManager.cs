@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -22,20 +24,9 @@ public class CarManager : ICarService
         _carDal = carDal;
     }
 
+    [ValidationAspect(typeof(CarValidator))]
     public IResult Add(Car car)
     {
-        // Araba ismi minimum 2 karakter olmalı
-        if (car.Description.Length < 2)
-        {
-            throw new Exception("Car name must be at least 2 characters.");
-        }
-
-        // Araba günlük fiyatı 0'dan büyük olmalı
-        if (car.DailyPrice <= 0)
-        {
-            throw new Exception("Car daily price must be greater than 0.");
-        }
-
         Car newCar = new();
         newCar.CreatedDate = DateTime.Now;
         newCar.CreatedBy = car.UserId;

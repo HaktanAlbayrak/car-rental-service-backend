@@ -13,7 +13,7 @@ namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarDbContext))]
     [Migration("20240906101859_create-user-customer-rental-tables")]
-    partial class createusercustomerrentaltables
+    partial class CreateuserCustomerRentalTables : Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
