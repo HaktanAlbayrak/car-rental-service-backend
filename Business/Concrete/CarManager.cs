@@ -15,7 +15,7 @@ namespace Business.Concrete;
 
 public class CarManager : ICarService
 {
-    ICarDal _carDal;
+    private readonly ICarDal _carDal;
 
     public CarManager(ICarDal carDal)
     {
@@ -36,7 +36,11 @@ public class CarManager : ICarService
             throw new Exception("Car daily price must be greater than 0.");
         }
 
-        _carDal.Add(car);
+        Car newCar = new();
+        newCar.CreatedDate = DateTime.Now;
+        newCar.CreatedBy = car.UserId;
+
+        _carDal.Add(newCar);
 
         return new SuccessResult(Messages.CarAdded);
     }

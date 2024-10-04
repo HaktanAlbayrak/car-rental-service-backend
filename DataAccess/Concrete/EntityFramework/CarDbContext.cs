@@ -13,6 +13,9 @@ public class CarDbContext : DbContext
     public DbSet<Car> Cars { get; set; }
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Color> Colors { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Rental> Rentals { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -30,5 +33,23 @@ public class CarDbContext : DbContext
             .HasOne(c => c.Color)
             .WithMany(co => co.Cars)
             .HasForeignKey(c => c.ColorId);
+
+        modelBuilder.Entity<User>()
+           .HasOne(u => u.Customer)
+           .WithOne(c => c.User)
+           .HasForeignKey<Customer>(c => c.UserId)
+           .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Car>()
+           .HasOne(c => c.Rental)
+           .WithOne(r => r.Car)
+           .HasForeignKey<Rental>(r => r.CarId)
+           .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Rental>()
+           .HasOne(r => r.Customer)
+           .WithMany(c => c.Rentals)
+           .HasForeignKey(r => r.CustomerId)
+           .OnDelete(DeleteBehavior.Cascade);
     }
 }

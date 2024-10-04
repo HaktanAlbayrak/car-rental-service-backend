@@ -52,6 +52,14 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
         }
     }
 
+    public IQueryable<TEntity> Quaryable()
+    {
+        using (TContext context = new TContext())
+        {
+            return context.Set<TEntity>().AsQueryable();
+        }
+    }
+
     public void Update(TEntity entity)
     {
         using (TContext context = new TContext())

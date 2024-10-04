@@ -10,6 +10,7 @@ namespace Entities.Concrete;
 
 public class Car : BaseEntity, IEntity
 {
+    public int UserId { get; set; }
     public int BrandId { get; set; }
     public int ColorId { get; set; }
     public int ModelYear { get; set; }
@@ -18,4 +19,6 @@ public class Car : BaseEntity, IEntity
 
     public Brand Brand { get; set; }
     public Color Color { get; set; }
+    public Rental Rental { get; set; }
+
 }
