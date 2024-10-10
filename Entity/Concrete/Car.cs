@@ -21,4 +21,5 @@ public class Car : BaseEntity, IEntity
     public Color Color { get; set; }
     public Rental Rental { get; set; }
 
+    public ICollection<CarImage> CarImages { get; set; }
 }

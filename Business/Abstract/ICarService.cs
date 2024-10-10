@@ -12,9 +12,9 @@ public interface ICarService
 {
     IDataResult<Car> GetById(int carId);
     IDataResult<List<Car>> GetAll();
-    IResult Add(Car car);
-    IResult Update(Car car);
-    IResult Delete(Car car);
+    IOperationResult Add(Car car);
+    IOperationResult Update(Car car);
+    IOperationResult Delete(Car car);
     IDataResult<List<Car>> GetCarsByBrandId(int brandId);
     IDataResult<List<Car>> GetCarsByColorId(int colorId);
 }

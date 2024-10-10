@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results;
 
-// Temel voidler için başlangıç
-public interface IResult
+public interface IOperationResult
 {
     bool Success { get; }
     string Message { get; }

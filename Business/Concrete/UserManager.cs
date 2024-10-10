@@ -21,7 +21,7 @@ public class UserManager : IUserService
         _userDal = userDal;
     }
 
-    public IResult Add(User user)
+    public IOperationResult Add(User user)
     {
         if (_userDal.Quaryable().Any(u => u.Email == user.Email))
         {
@@ -31,7 +31,7 @@ public class UserManager : IUserService
         return new SuccessResult(Messages.UserAdded);
     }
 
-    public IResult Delete(User user)
+    public IOperationResult Delete(User user)
     {
         _userDal.Delete(user);
         return new SuccessResult(Messages.UserDeleted);
@@ -47,7 +47,7 @@ public class UserManager : IUserService
         return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
     }
 
-    public IResult Update(User user)
+    public IOperationResult Update(User user)
     {
         _userDal.Update(user);
         return new SuccessResult(Messages.UserUpdated);

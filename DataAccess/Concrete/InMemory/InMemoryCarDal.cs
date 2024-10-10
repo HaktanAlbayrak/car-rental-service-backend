@@ -73,9 +73,9 @@ public class InMemoryCarDal
 
     public void Delete(Car car)
     {
-        Car carToDelete = _cars.FirstOrDefault(c => c.Id == car.Id);
+        //Car carToDelete = _cars.FirstOrDefault(c => c.Id == car.Id);
 
-        _cars.Remove(carToDelete);
+        //_cars.Remove(carToDelete);
     }
 
     public Car Get(Expression<Func<Car, bool>> filter)

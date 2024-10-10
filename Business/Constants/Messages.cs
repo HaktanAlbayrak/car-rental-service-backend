@@ -46,4 +46,12 @@ public class Messages
     public static string CustomerDeleted = "Customer Deleted";
     public static string CustomerUpdated = "Customer Updated";
     public static string CustomersListed = "Customer Listed";
+
+    //Car Image
+    public static string CarImageLimitReached = "A car can have up to 5 pictures!";
+    public static string FileUploadError = "An error occurred while uploading the file.";
+    public static string InvalidFile = "Invalid file.";
+    public static string ImageAdded = "Image added successfully.";
+    public static string ImageDeleted = "Image deleted successfully.";
+    public static string ImageUpdated = "Image updated successfully.";
 }

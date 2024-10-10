@@ -24,7 +24,7 @@ public class RentalManager : IRentalService
         _carDal = carDal;
     }
 
-    public IResult Add(Rental rental)
+    public IOperationResult Add(Rental rental)
     {
         var car = _carDal.Get(c => c.Id == rental.CarId);
         // Arabanın mevcut durumunu kontrol et
@@ -39,7 +39,7 @@ public class RentalManager : IRentalService
         return new SuccessResult(Messages.RentalAdded);
     }
 
-    public IResult Delete(Rental rental)
+    public IOperationResult Delete(Rental rental)
     {
         _rentalDal.Delete(rental);
         return new SuccessResult(Messages.RentalDeleted);
@@ -55,7 +55,7 @@ public class RentalManager : IRentalService
         return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == rentalId));
     }
 
-    public IResult Update(Rental rental)
+    public IOperationResult Update(Rental rental)
     {
         _rentalDal.Update(rental);
         return new SuccessResult(Messages.RentalUpdated);

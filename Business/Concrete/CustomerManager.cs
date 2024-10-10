@@ -21,7 +21,7 @@ public class CustomerManager : ICustomerService
         _customerDal = customerDal;
     }
 
-    public IResult Add(Customer customer)
+    public IOperationResult Add(Customer customer)
     {
         if (_customerDal.Quaryable().Any(u => u.UserId == customer.UserId))
         {
@@ -31,7 +31,7 @@ public class CustomerManager : ICustomerService
         return new SuccessResult(Messages.CustomerAdded);
     }
 
-    public IResult Delete(Customer customer)
+    public IOperationResult Delete(Customer customer)
     {
         _customerDal.Delete(customer);
         return new SuccessResult(Messages.CustomerDeleted);
@@ -47,7 +47,7 @@ public class CustomerManager : ICustomerService
         return new SuccessDataResult<Customer>(_customerDal.Get(u => u.UserId == customerId));
     }
 
-    public IResult Update(Customer customer)
+    public IOperationResult Update(Customer customer)
     {
         _customerDal.Update(customer);
         return new SuccessResult(Messages.CustomerUpdated);

@@ -16,6 +16,7 @@ public class CarDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Rental> Rentals { get; set; }
+    public DbSet<CarImage> CarImages { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -51,5 +52,11 @@ public class CarDbContext : DbContext
            .WithMany(c => c.Rentals)
            .HasForeignKey(r => r.CustomerId)
            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Car>()
+                .HasMany(c => c.CarImages)
+                .WithOne(ci => ci.Car)  
+                .HasForeignKey(ci => ci.CarId)  
+                .OnDelete(DeleteBehavior.Cascade);
     }
 }

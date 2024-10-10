@@ -25,7 +25,7 @@ public class CarManager : ICarService
     }
 
     [ValidationAspect(typeof(CarValidator))]
-    public IResult Add(Car car)
+    public IOperationResult Add(Car car)
     {
         Car newCar = new();
         newCar.CreatedDate = DateTime.Now;
@@ -36,7 +36,7 @@ public class CarManager : ICarService
         return new SuccessResult(Messages.CarAdded);
     }
 
-    public IResult Delete(Car car)
+    public IOperationResult Delete(Car car)
     {
         _carDal.Delete(car);
 
@@ -64,7 +64,7 @@ public class CarManager : ICarService
         return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
     }
 
-    public IResult Update(Car car)
+    public IOperationResult Update(Car car)
     {
         _carDal.Update(car);
 
