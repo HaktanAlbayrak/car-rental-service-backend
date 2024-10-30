@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -21,35 +22,18 @@ public class UserManager : IUserService
         _userDal = userDal;
     }
 
-    public IOperationResult Add(User user)
+    public List<OperationClaim> GetClaims(User user)
     {
-        if (_userDal.Quaryable().Any(u => u.Email == user.Email))
-        {
-            return new ErrorResult(Messages.ExistingUser);
-        }
+        return _userDal.GetClaims(user);
+    }
+
+    public void Add(User user)
+    {
         _userDal.Add(user);
-        return new SuccessResult(Messages.UserAdded);
     }
 
-    public IOperationResult Delete(User user)
+    public User GetByMail(string email)
     {
-        _userDal.Delete(user);
-        return new SuccessResult(Messages.UserDeleted);
-    }
-
-    public IDataResult<List<User>> GetAll()
-    {
-        return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
-    }
-
-    public IDataResult<User> GetById(int userId)
-    {
-        return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
-    }
-
-    public IOperationResult Update(User user)
-    {
-        _userDal.Update(user);
-        return new SuccessResult(Messages.UserUpdated);
+        return _userDal.Get(u => u.Email == email);
     }
 }

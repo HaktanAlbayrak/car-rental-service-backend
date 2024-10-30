@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ public class CarDbContext : DbContext
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Rental> Rentals { get; set; }
     public DbSet<CarImage> CarImages { get; set; }
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -35,11 +38,6 @@ public class CarDbContext : DbContext
             .WithMany(co => co.Cars)
             .HasForeignKey(c => c.ColorId);
 
-        modelBuilder.Entity<User>()
-           .HasOne(u => u.Customer)
-           .WithOne(c => c.User)
-           .HasForeignKey<Customer>(c => c.UserId)
-           .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Car>()
            .HasOne(c => c.Rental)
@@ -54,9 +52,22 @@ public class CarDbContext : DbContext
            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Car>()
-                .HasMany(c => c.CarImages)
-                .WithOne(ci => ci.Car)  
-                .HasForeignKey(ci => ci.CarId)  
-                .OnDelete(DeleteBehavior.Cascade);
+            .HasMany(c => c.CarImages)
+            .WithOne(ci => ci.Car)
+            .HasForeignKey(ci => ci.CarId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserOperationClaim>()
+            .HasOne(uoc => uoc.User)
+            .WithMany(u => u.UserOperationClaims)
+            .HasForeignKey(uoc => uoc.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserOperationClaim>()
+            .HasOne(uoc => uoc.OperationClaim)
+            .WithMany(oc => oc.UserOperationClaims)
+            .HasForeignKey(uoc => uoc.OperationClaimId)
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

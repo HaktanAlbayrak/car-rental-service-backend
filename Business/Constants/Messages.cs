@@ -32,7 +32,7 @@ public class Messages
     public static string RentalDeleted = "Rental Deleted";
     public static string RentalUpdated = "Rental Updated";
     public static string RentalsListed = "Rentals Listed";
-    
+
     //User 
     public static string ExistingUser = "User is exist";
     public static string UserAdded = "User Added";
@@ -54,4 +54,14 @@ public class Messages
     public static string ImageAdded = "Image added successfully.";
     public static string ImageDeleted = "Image deleted successfully.";
     public static string ImageUpdated = "Image updated successfully.";
+
+    // Auth
+    public static string AuthorizationDenied = "You do not have permission";
+    public static string UserNotFound = "User not found";
+    public static string PasswordError = "Incorrect password";
+    public static string SuccessfulLogin = "Login successful";
+    public static string UserAlreadyExists = "This user already exists";
+    public static string UserRegistered = "User registered successfully";
+    public static string AccessTokenCreated = "Access token created successfully";
+
 }
