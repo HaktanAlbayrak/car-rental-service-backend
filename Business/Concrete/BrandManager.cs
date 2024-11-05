@@ -21,13 +21,13 @@ public class BrandManager : IBrandService
         _brandDal = brandDal;
     }
 
-    public IOperationResult Add(Brand brand)
+    public IResult Add(Brand brand)
     {
         _brandDal.Add(brand);
         return new SuccessResult(Messages.BrandAdded);
     }
 
-    public IOperationResult Delete(Brand brand)
+    public IResult Delete(Brand brand)
     {
         _brandDal.Delete(brand);
         return new SuccessResult(Messages.BrandDeleted);
@@ -43,7 +43,7 @@ public class BrandManager : IBrandService
         return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == brandId));
     }
 
-    public IOperationResult Update(Brand brand)
+    public IResult Update(Brand brand)
     {
         _brandDal.Update(brand);
         return new SuccessResult(Messages.BrandUpdated);

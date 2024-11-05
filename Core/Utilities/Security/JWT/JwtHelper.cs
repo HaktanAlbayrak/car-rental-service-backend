@@ -22,8 +22,7 @@ public class JwtHelper : ITokenHelper
     public JwtHelper(IConfiguration configuration)
     {
         Configuration = configuration;
-        _tokenOptions = Configuration.GetSection("TokenOptions")
-                                     .Get<TokenOptions>();
+        _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
     }
     public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
@@ -56,7 +55,6 @@ public class JwtHelper : ITokenHelper
         );
         return jwt;
     }
-
     private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
     {
         var claims = new List<Claim>();
@@ -64,7 +62,6 @@ public class JwtHelper : ITokenHelper
         claims.AddEmail(user.Email);
         claims.AddName($"{user.FirstName} {user.LastName}");
         claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
-
         return claims;
     }
 }

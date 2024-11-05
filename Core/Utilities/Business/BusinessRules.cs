@@ -9,7 +9,7 @@ namespace Core.Utilities.Business;
 
 public class BusinessRules
 {
-    public static IOperationResult Run(params IOperationResult[] logics)
+    public static IResult Run(params IResult[] logics)
     {
         foreach (var logic in logics)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results;
 
-public class Result : IOperationResult
+public class Result : IResult
 {
 
     public Result(bool success, string message) : this(success)

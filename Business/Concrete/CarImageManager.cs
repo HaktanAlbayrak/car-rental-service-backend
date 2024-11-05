@@ -25,9 +25,9 @@ public class CarImageManager : ICarImageService
         _fileHelperService = fileHelperService;
     }
 
-    public IOperationResult Add(IFormFile file, CarImage carImage)
+    public Core.Utilities.Results.IResult Add(IFormFile file, CarImage carImage)
     {
-        IOperationResult result = BusinessRules.Run(CheckCarImageLimit(carImage.CarId));
+        Core.Utilities.Results.IResult result = BusinessRules.Run(CheckCarImageLimit(carImage.CarId));
         if (result.Success)
         {
             return result;
@@ -51,7 +51,7 @@ public class CarImageManager : ICarImageService
         return new SuccessResult(Messages.ImageAdded);
     }
 
-    public IOperationResult Delete(CarImage carImage)
+    public Core.Utilities.Results.IResult Delete(CarImage carImage)
     {
         var filePath = Path.Combine("Root/images", carImage.ImagePath);
         _fileHelperService.Delete(filePath);
@@ -75,7 +75,7 @@ public class CarImageManager : ICarImageService
         return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
     }
 
-    public IOperationResult Update(IFormFile file, CarImage carImage)
+    public Core.Utilities.Results.IResult Update(IFormFile file, CarImage carImage)
     {
 
         if (file.Length <= 0)
@@ -106,7 +106,7 @@ public class CarImageManager : ICarImageService
         return new SuccessResult(Messages.ImageUpdated);
     }
 
-    private IOperationResult CheckCarImageLimit(int carId)
+    private Core.Utilities.Results.IResult CheckCarImageLimit(int carId)
     {
         var result = _carImageDal.GetAll(i => i.CarId == carId).Count();
         if (result > 5)

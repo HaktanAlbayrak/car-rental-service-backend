@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ public class AuthManager : IAuthService
         return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
     }
 
-    public IOperationResult UserExists(string email)
+    public Core.Utilities.Results.IResult UserExists(string email)
     {
         if (_userService.GetByMail(email) != null)
         {

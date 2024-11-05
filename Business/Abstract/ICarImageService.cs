@@ -14,8 +14,8 @@ namespace Business.Abstract
         IDataResult<List<CarImage>> GetImages();
         IDataResult<List<CarImage>> GetImagesByCarId(int carId);
         IDataResult<CarImage> GetImageById(int carImageId);
-        IOperationResult Add(IFormFile file, CarImage carImage);
-        IOperationResult Delete(CarImage carImage);
-        IOperationResult Update(IFormFile file, CarImage carImage);
+        Core.Utilities.Results.IResult Add(IFormFile file, CarImage carImage);
+        Core.Utilities.Results.IResult Delete(CarImage carImage);
+        Core.Utilities.Results.IResult Update(IFormFile file, CarImage carImage);
     }
 }

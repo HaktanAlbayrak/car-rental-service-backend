@@ -12,7 +12,7 @@ public interface IRentalService
 {
     IDataResult<Rental> GetById(int rentalId);
     IDataResult<List<Rental>> GetAll();
-    IOperationResult Add(Rental rental);
-    IOperationResult Update(Rental rental);
-    IOperationResult Delete(Rental rental);
+    IResult Add(Rental rental);
+    IResult Update(Rental rental);
+    IResult Delete(Rental rental);
 }
