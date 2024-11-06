@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20241030083145_AddUserAndOperationClaimTables")]
-    partial class AddUserAndOperationClaimTables
+    [Migration("20241106080625_ChangeVarbinaryTo500InUsersTable")]
+    partial class ChangeVarbinaryTo500InUsersTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,11 +65,11 @@ namespace DataAccess.Migrations
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(500)");
 
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(500)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.EntityFramework;
+namespace DataAccess.Concrete.EntityFramework.Context;
 
 public class CarDbContext : DbContext
 {
@@ -69,5 +69,12 @@ public class CarDbContext : DbContext
             .HasForeignKey(uoc => uoc.OperationClaimId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<User>()
+            .Property(u => u.PasswordHash)
+            .HasColumnType("varbinary(500)");
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.PasswordSalt)
+            .HasColumnType("varbinary(500)");
     }
 }
