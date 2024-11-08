@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entities.DTOs;
+using Entities.DTOs.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
