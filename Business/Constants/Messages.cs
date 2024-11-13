@@ -14,6 +14,7 @@ public class Messages
     public static string CarUpdated = "Car Updated";
     public static string CarsListed = "Cars Listed";
     public static string CarIsAlreadyRented = "Car is already rented!";
+    public static string NoCarIsAvailable = "No cars are available in the system.";
 
     //Color
     public static string ColorAdded = "Color Added";

@@ -7,6 +7,8 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs.Requests;
+using Entities.DTOs.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +29,17 @@ public class CarManager : ICarService
 
     [SecuredOperation("car.add,admin")]
     [ValidationAspect(typeof(CarValidator))]
-    public IResult Add(Car car)
+    public IResult Add(CreateCarRequest createCarRequest)
     {
         Car newCar = new();
         newCar.CreatedDate = DateTime.Now;
-        newCar.CreatedBy = car.UserId;
+        newCar.CreatedBy = createCarRequest.UserId;
+        newCar.BrandId = createCarRequest.BrandId;
+        newCar.ColorId = createCarRequest.ColorId;
+        newCar.DailyPrice = createCarRequest.DailyPrice;
+        newCar.Description = createCarRequest.Description;
+        newCar.ModelYear = createCarRequest.ModelYear;
+        newCar.UserId = createCarRequest.UserId;
 
         _carDal.Add(newCar);
 
@@ -45,9 +53,33 @@ public class CarManager : ICarService
         return new SuccessResult(Messages.CarDeleted);
     }
 
-    public IDataResult<List<Car>> GetAll()
+    public IDataResult<List<GetAllCarResponse>> GetAll()
     {
-        return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
+        var cars = _carDal.GetAll();
+
+        if (cars == null || !cars.Any())
+        {
+            return new ErrorDataResult<List<GetAllCarResponse>>(new List<GetAllCarResponse>(), Messages.NoCarIsAvailable);
+        }
+
+        var carResponses = cars.Select(car => new GetAllCarResponse
+        {
+            UserId = car.UserId,
+            BrandId = car.BrandId,
+            ColorId = car.ColorId,
+            ModelYear = car.ModelYear,
+            DailyPrice = car.DailyPrice,
+            Description = car.Description,
+            Id = car.Id,
+            CreatedDate = car.CreatedDate,
+            CarImages = car.CarImages?.Select(img => new CarImageDto
+            {
+                CarId = img.CarId,
+                ImagePath = img.ImagePath
+            }).ToList() ?? new List<CarImageDto>()
+        }).ToList();
+
+        return new SuccessDataResult<List<GetAllCarResponse>>(carResponses, Messages.CarsListed);
     }
 
 
